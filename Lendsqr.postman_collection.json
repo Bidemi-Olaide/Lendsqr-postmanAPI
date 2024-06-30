@@ -1,0 +1,1385 @@
+{
+	"info": {
+		"_postman_id": "cfaf58d9-1bf9-4029-a74d-f09d619afb31",
+		"name": "Lendsqr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22871652",
+		"_collection_link": "https://www.postman.com/solar-comet-738470/workspace/lendsqr/collection/22871652-cfaf58d9-1bf9-4029-a74d-f09d619afb31?action=share&source=collection_link&creator=22871652"
+	},
+	"item": [
+		{
+			"name": "Validation",
+			"item": [
+				{
+					"name": "Karma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"status\", \"success\");\r",
+									"    pm.expect(jsonData).to.have.property(\"message\", \"Successful\");\r",
+									"    pm.expect(jsonData).to.have.property(\"data\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data).to.have.property(\"karma_identity\").that.is.a('string').and.not.empty;\r",
+									"    pm.expect(jsonData.data).to.have.property(\"amount_in_contention\").that.is.a('string');\r",
+									"    pm.expect(jsonData.data).to.have.property(\"reason\").that.is.null;\r",
+									"    pm.expect(jsonData.data).to.have.property(\"default_date\").that.is.a('string').and.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+									"    pm.expect(jsonData.data).to.have.property(\"karma_type\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.karma_type).to.have.property(\"karma\", \"Others\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"karma_identity_type\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.karma_identity_type).to.have.property(\"identity_type\", \"Domain\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"reporting_entity\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.reporting_entity).to.have.property(\"name\", \"Blinkcash\");\r",
+									"    pm.expect(jsonData.data.reporting_entity).to.have.property(\"email\", \"support@blinkcash.ng\");\r",
+									"    pm.expect(jsonData).to.have.property(\"deprecation\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.deprecation).to.have.property(\"message\").that.is.a('string').and.not.empty;\r",
+									"    pm.expect(jsonData).to.have.property(\"meta\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.meta).to.have.property(\"cost\", 10);\r",
+									"    pm.expect(jsonData.meta).to.have.property(\"balance\").that.is.a('number');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Deprecation message exists and is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"deprecation\");\r",
+									"    pm.expect(jsonData.deprecation).to.have.property(\"message\", \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/verification/karma/0zspgifzbo.ga?identity=haramidey239@gmail.com going forward.\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Cost and balance metadata are correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta).to.have.property(\"cost\", 10);\r",
+									"    pm.expect(jsonData.meta).to.have.property(\"balance\").that.is.a('number').and.is.at.least(0);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Identity type is Domain\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.karma_identity_type).to.have.property(\"identity_type\", \"Domain\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Default date format is YYYY-MM-DD\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.default_date).to.match(/^\\d{4}-\\d{2}-\\d{2}$/);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/verification/karma/0zspgifzbo.ga?identity=haramidey239@gmail",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"verification",
+								"karma",
+								"0zspgifzbo.ga"
+							],
+							"query": [
+								{
+									"key": "identity",
+									"value": "haramidey239@gmail"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Karma",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/verification/karma/0zspgifzbo.ga?identity=haramidey239@gmail.com",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"verification",
+										"karma",
+										"0zspgifzbo.ga"
+									],
+									"query": [
+										{
+											"key": "identity",
+											"value": "haramidey239@gmail.com"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 16:19:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "cc9d962a-4e85-4de9-a525-5f1b8f19b8a8"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 28 Jun 2024 16:19:24 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21b-01mzNRLOf3VqVfksJZkQEUNvTiA\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89aeff8c7abff144-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"data\": {\n        \"karma_identity\": \"0zspgifzbo.ga\",\n        \"amount_in_contention\": \"0.00\",\n        \"reason\": null,\n        \"default_date\": \"2020-05-18\",\n        \"karma_type\": {\n            \"karma\": \"Others\"\n        },\n        \"karma_identity_type\": {\n            \"identity_type\": \"Domain\"\n        },\n        \"reporting_entity\": {\n            \"name\": \"Blinkcash\",\n            \"email\": \"support@blinkcash.ng\"\n        }\n    },\n    \"deprecation\": {\n        \"message\": \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/verification/karma/0zspgifzbo.ga?identity=haramidey239@gmail.com going forward.\"\n    },\n    \"meta\": {\n        \"cost\": 10,\n        \"balance\": 970\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Bank Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account_number\": \"8411361083\",\r\n        \"bank_code\":\"232\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/verification/bankaccount",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"verification",
+								"bankaccount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Miscellenous",
+			"item": [
+				{
+					"name": "Status Code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test for overall response status\r",
+									"pm.test(\"Response status is true\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"status\", true);\r",
+									"});\r",
+									"\r",
+									"// Test for specific successful services\r",
+									"pm.test(\"Check successful services\", function () {\r",
+									"    const data = pm.response.json().data;\r",
+									"    pm.expect(data.filter(service => service.success === true)).to.have.lengthOf.above(0);\r",
+									"});\r",
+									"\r",
+									"// Test for specific unsuccessful services\r",
+									"pm.test(\"Check unsuccessful services\", function () {\r",
+									"    const data = pm.response.json().data;\r",
+									"    pm.expect(data.filter(service => service.success === false)).to.have.lengthOf.above(0);\r",
+									"});\r",
+									"\r",
+									"// Test for specific services known to succeed\r",
+									"pm.test(\"Verify specific successful services\", function () {\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-oraculi-scoring\" && service.success === true)).to.be.true;\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-karma-lookup\" && service.success === true)).to.be.true;\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-image-compare\" && service.success === true)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"// Test for specific services known to fail\r",
+									"pm.test(\"Verify specific unsuccessful services\", function () {\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-name-inquiry\" && service.success === false)).to.be.true;\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-bvn-verification\" && service.success === false)).to.be.true;\r",
+									"    pm.expect(pm.response.json().data.some(service => service.service === \"adjutor-direct-debit\" && service.success === false)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"// Test for at least one successful and one unsuccessful service\r",
+									"pm.test(\"Check at least one successful and one unsuccessful service\", function () {\r",
+									"    const data = pm.response.json().data;\r",
+									"    const hasSuccessful = data.some(service => service.success === true);\r",
+									"    const hasUnsuccessful = data.some(service => service.success === false);\r",
+									"    pm.expect(hasSuccessful && hasUnsuccessful).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/status",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Status Code",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/status",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 17:45:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "67f8fbe9-5474-4be6-a3a4-a61d1f8cb0b8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"93f-7zJZHEVckSsfNca+rCjImmdAfHE\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af7e5e3b8bf13c-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": [\n        {\n            \"service\": \"adjutor-oraculi-scoring\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-name-inquiry\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-name-inquiry-bvn\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-karma-lookup\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-bvn-verification\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-image-compare\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-ecosystem-lookup\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-bank-list\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-crc\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-firstcentral\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-credit-registry\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-oraculi-accounts\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-oraculi-statement\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-oraculi-analytics\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-oraculi-models\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-bvn-initialize\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-bvn-complete\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-bvn-accounts-initialize\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-bvn-accounts-complete\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-list-banks\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-account-lookup\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-balance-lookup\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-create-mandate\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-list-mandates\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-update-mandate\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-debit-mandate\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-list-transactions\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-create-biller\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-list-billers\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-mandate-debit\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-direct-debit-generate-form\",\n            \"success\": false\n        },\n        {\n            \"service\": \"adjutor-kolo-auth\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-view-transactions\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-update-transactions\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-view-profile\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-view-accounts\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-add-account\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-sync-account\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-update-account\",\n            \"success\": true\n        },\n        {\n            \"service\": \"adjutor-kolo-delete-account\",\n            \"success\": true\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Bank List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body must have message\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"message\", \"Successful\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Check data presence\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.be.an('array').that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Check specific banks\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const expectedBanks = [\r",
+									"        \"Access Bank\",\r",
+									"        \"Guaranty Trust Bank\",\r",
+									"        \"Zenith Bank\",\r",
+									"        \"First Bank of Nigeria\",\r",
+									"    ];\r",
+									"    const actualBanks = jsonData.data.map(bank => bank.name);\r",
+									"    expectedBanks.forEach(expectedBank => {\r",
+									"        pm.expect(actualBanks).to.include(expectedBank);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Check cost and balance meta data\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.meta.cost).to.eql(0);\r",
+									"    pm.expect(jsonData.meta.balance).to.eql(940);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/misc/banks",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"misc",
+								"banks"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bank List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/misc/banks",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"misc",
+										"banks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 17:42:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "aab6e595-17d5-405f-9d31-4074f087f820"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 28 Jun 2024 17:41:59 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e59-cYNKsm+p3XE/J8KRzpaqOlkf4+4\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af7888afdaf13c-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"data\": [\n        {\n            \"name\": \"3line\",\n            \"shortcode\": \"110005\",\n            \"longcode\": \"110005\"\n        },\n        {\n            \"name\": \"Access Bank\",\n            \"shortcode\": \"044\",\n            \"longcode\": \"000014\"\n        },\n        {\n            \"name\": \"Alat by Wema\",\n            \"shortcode\": \"035\",\n            \"longcode\": \"000017\"\n        },\n        {\n            \"name\": \"ASO Savings and Loans\",\n            \"shortcode\": \"401\",\n            \"longcode\": \"090001\"\n        },\n        {\n            \"name\": \"Bankly MFB\",\n            \"shortcode\": \"\",\n            \"longcode\": \"090529\"\n        },\n        {\n            \"name\": \"Carbon\",\n            \"shortcode\": \"565\",\n            \"longcode\": \"100026\"\n        },\n        {\n            \"name\": \"CEMCS Microfinance Bank\",\n            \"shortcode\": \"50823\",\n            \"longcode\": \"090154\"\n        },\n        {\n            \"name\": \"Citibank Nigeria\",\n            \"shortcode\": \"023\",\n            \"longcode\": \"000009\"\n        },\n        {\n            \"name\": \"Coronation Merchant Bank\",\n            \"shortcode\": \"946\",\n            \"longcode\": \"060001\"\n        },\n        {\n            \"name\": \"Coronation Merchant Bank\",\n            \"shortcode\": \"559\",\n            \"longcode\": \"060001\"\n        },\n        {\n            \"name\": \"Dot pay\",\n            \"shortcode\": \"090470\",\n            \"longcode\": \"090470\"\n        },\n        {\n            \"name\": \"Ecobank Nigeria\",\n            \"shortcode\": \"050\",\n            \"longcode\": \"000010\"\n        },\n        {\n            \"name\": \"Ekondo Microfinance Bank\",\n            \"shortcode\": \"562\",\n            \"longcode\": \"090097\"\n        },\n        {\n            \"name\": \"Fairmoney MFB\",\n            \"shortcode\": \"090551\",\n            \"longcode\": \"090551\"\n        },\n        {\n            \"name\": \"FBNQuest Merchant Bank\",\n            \"shortcode\": \"911\",\n            \"longcode\": \"060002\"\n        },\n        {\n            \"name\": \"Fidelity Bank\",\n            \"shortcode\": \"070\",\n            \"longcode\": \"000007\"\n        },\n        {\n            \"name\": \"Firmus MFB\",\n            \"shortcode\": \"51314\",\n            \"longcode\": \"090366\"\n        },\n        {\n            \"name\": \"First Bank of Nigeria\",\n            \"shortcode\": \"011\",\n            \"longcode\": \"000016\"\n        },\n        {\n            \"name\": \"First City Monument Bank\",\n            \"shortcode\": \"214\",\n            \"longcode\": \"000003\"\n        },\n        {\n            \"name\": \"FSDH Merchant Bank\",\n            \"shortcode\": \"501\",\n            \"longcode\": \"400001\"\n        },\n        {\n            \"name\": \"Globus Bank\",\n            \"shortcode\": \"103\",\n            \"longcode\": \"000027\"\n        },\n        {\n            \"name\": \"Guaranty Trust Bank\",\n            \"shortcode\": \"058\",\n            \"longcode\": \"000013\"\n        },\n        {\n            \"name\": \"Hasal Microfinance Bank\",\n            \"shortcode\": \"50383\",\n            \"longcode\": \"090121\"\n        },\n        {\n            \"name\": \"Jaiz Bank\",\n            \"shortcode\": \"301\",\n            \"longcode\": \"000006\"\n        },\n        {\n            \"name\": \"Keystone Bank\",\n            \"shortcode\": \"082\",\n            \"longcode\": \"000002\"\n        },\n        {\n            \"name\": \"Kredi Bank\",\n            \"shortcode\": \"50200\",\n            \"longcode\": \"090380\"\n        },\n        {\n            \"name\": \"Kuda Bank\",\n            \"shortcode\": \"50211\",\n            \"longcode\": \"090267\"\n        },\n        {\n            \"name\": \"Lotus Bank\",\n            \"shortcode\": \"000029\",\n            \"longcode\": \"000029\"\n        },\n        {\n            \"name\": \"MoniePoint Bank\",\n            \"shortcode\": \"50515\",\n            \"longcode\": \"090405\"\n        },\n        {\n            \"name\": \"Nova Merchant Bank\",\n            \"shortcode\": \"561\",\n            \"longcode\": \"060003\"\n        },\n        {\n            \"name\": \"One Finance\",\n            \"shortcode\": \"565\",\n            \"longcode\": \"100026\"\n        },\n        {\n            \"name\": \"Parallex Bank\",\n            \"shortcode\": \"526\",\n            \"longcode\": \"090004\"\n        },\n        {\n            \"name\": \"Paystack-Titan\",\n            \"shortcode\": \"100039\",\n            \"longcode\": \"100039\"\n        },\n        {\n            \"name\": \"Polaris Bank\",\n            \"shortcode\": \"076\",\n            \"longcode\": \"000008\"\n        },\n        {\n            \"name\": \"Premium Trust Bank\",\n            \"shortcode\": \"105\",\n            \"longcode\": \"000031\"\n        },\n        {\n            \"name\": \"Providus Bank\",\n            \"shortcode\": \"101\",\n            \"longcode\": \"000023\"\n        },\n        {\n            \"name\": \"Rand Merchant Bank Nigeria\",\n            \"shortcode\": \"502\",\n            \"longcode\": \"000024\"\n        },\n        {\n            \"name\": \"Rubies MFB\",\n            \"shortcode\": \"125\",\n            \"longcode\": \"090175\"\n        },\n        {\n            \"name\": \"Sparkle Bank\",\n            \"shortcode\": \"51310\",\n            \"longcode\": \"090325\"\n        },\n        {\n            \"name\": \"Stanbic IBTC Bank\",\n            \"shortcode\": \"221\",\n            \"longcode\": \"000012\"\n        },\n        {\n            \"name\": \"Standard Chartered Bank\",\n            \"shortcode\": \"068\",\n            \"longcode\": \"000021\"\n        },\n        {\n            \"name\": \"Sterling Bank\",\n            \"shortcode\": \"232\",\n            \"longcode\": \"000001\"\n        },\n        {\n            \"name\": \"Suntrust Bank\",\n            \"shortcode\": \"100\",\n            \"longcode\": \"000022\"\n        },\n        {\n            \"name\": \"Support MFB\",\n            \"shortcode\": \"295\",\n            \"longcode\": \"50812\"\n        },\n        {\n            \"name\": \"TAJ Bank\",\n            \"shortcode\": \"302\",\n            \"longcode\": \"000026\"\n        },\n        {\n            \"name\": \"TCF MFB\",\n            \"shortcode\": \"51211\",\n            \"longcode\": \"090115\"\n        },\n        {\n            \"name\": \"Titan Trust Bank\",\n            \"shortcode\": \"102\",\n            \"longcode\": \"000025\"\n        },\n        {\n            \"name\": \"Union Bank of Nigeria\",\n            \"shortcode\": \"032\",\n            \"longcode\": \"000018\"\n        },\n        {\n            \"name\": \"United Bank For Africa\",\n            \"shortcode\": \"033\",\n            \"longcode\": \"000004\"\n        },\n        {\n            \"name\": \"Unity Bank\",\n            \"shortcode\": \"215\",\n            \"longcode\": \"000011\"\n        },\n        {\n            \"name\": \"VFD\",\n            \"shortcode\": \"566\",\n            \"longcode\": \"090110\"\n        },\n        {\n            \"name\": \"Wema Bank\",\n            \"shortcode\": \"035\",\n            \"longcode\": \"000017\"\n        },\n        {\n            \"name\": \"Zenith Bank\",\n            \"shortcode\": \"057\",\n            \"longcode\": \"000015\"\n        }\n    ],\n    \"deprecation\": {\n        \"message\": \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/misc/banks going forward.\"\n    },\n    \"meta\": {\n        \"cost\": 0,\n        \"balance\": 940\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Decisioning",
+			"item": [
+				{
+					"name": "List Model",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"status\", \"success\");\r",
+									"    pm.expect(jsonData).to.have.property(\"message\", \"Successful\");\r",
+									"    pm.expect(jsonData).to.have.property(\"data\").that.is.an('array').and.not.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Deprecation message exists and is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"deprecation\");\r",
+									"    pm.expect(jsonData.deprecation).to.have.property(\"message\", \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models going forward.\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Decision models have required attributes\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.be.an('array').with.lengthOf(2);\r",
+									"    pm.expect(jsonData.data[0]).to.have.property(\"name\", \"Default Lendsqr decision model\");\r",
+									"    pm.expect(jsonData.data[0]).to.have.property(\"status\", \"active\");\r",
+									"    pm.expect(jsonData.data[1]).to.have.property(\"name\", \"Default Offline Decision Model\");\r",
+									"    pm.expect(jsonData.data[1]).to.have.property(\"status\", \"active\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Offer settings are within expected ranges\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    jsonData.data.forEach(function (model) {\r",
+									"        model.offer_setting.forEach(function (offer) {\r",
+									"            pm.expect(offer).to.have.property(\"maximum\").that.is.a(\"number\").and.is.at.most(1000000000);\r",
+									"            pm.expect(offer).to.have.property(\"minimum\").that.is.a(\"number\").and.is.at.least(10);\r",
+									"        });\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Karma is required and has correct sequence\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    jsonData.data.forEach(function (model) {\r",
+									"        pm.expect(model.decision_setting.karma).to.have.property(\"required\", true);\r",
+									"        pm.expect(model.decision_setting.karma).to.have.property(\"sequence\", 1);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/decisioning/models",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"decisioning",
+								"models"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Model",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/decisioning/models",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"decisioning",
+										"models"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 17:56:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "07160c61-f534-4c63-a2a7-7069fe188e69"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 28 Jun 2024 17:56:54 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56e-IP5sKYSnYkzUqukOL2iBHs2YHOE\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af8e5e68ed0498-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"data\": [\n        {\n            \"id\": 9279,\n            \"product_id\": null,\n            \"org_id\": 5301,\n            \"version_id\": 0,\n            \"country\": \"NGA\",\n            \"name\": \"Default Lendsqr decision model\",\n            \"description\": \"Default decision model apply to all lender or products without a decision model set for it\",\n            \"decision_setting\": {\n                \"karma\": {\n                    \"required\": true,\n                    \"sequence\": 1,\n                    \"continue_on_failure\": false,\n                    \"pre_offer\": true\n                },\n                \"ecosystem\": {\n                    \"required\": true,\n                    \"sequence\": 2,\n                    \"continue_on_failure\": false,\n                    \"pre_offer\": true\n                },\n                \"credit_bureau\": {\n                    \"required\": true,\n                    \"sequence\": 3,\n                    \"continue_on_failure\": false\n                }\n            },\n            \"offer_setting\": [\n                {\n                    \"rule\": {\n                        \"*\": [\n                            1,\n                            {\n                                \"var\": [\n                                    \"requested_amount\"\n                                ]\n                            }\n                        ]\n                    },\n                    \"maximum\": 1000000000,\n                    \"minimum\": 10\n                }\n            ],\n            \"status\": \"active\",\n            \"created_on\": \"2024-06-28T13:44:28.000Z\"\n        },\n        {\n            \"id\": 9280,\n            \"product_id\": null,\n            \"org_id\": 5301,\n            \"version_id\": 0,\n            \"country\": \"NGA\",\n            \"name\": \"Default Offline Decision Model\",\n            \"description\": \"Default decision model apply to all offline loan products on Lendsqr.\",\n            \"decision_setting\": {\n                \"karma\": {\n                    \"required\": true,\n                    \"sequence\": 1,\n                    \"continue_on_failure\": false,\n                    \"pre_offer\": true\n                },\n                \"credit_bureau\": {\n                    \"required\": true,\n                    \"sequence\": 2,\n                    \"continue_on_failure\": false\n                }\n            },\n            \"offer_setting\": [\n                {\n                    \"rule\": {\n                        \"*\": [\n                            1,\n                            {\n                                \"var\": [\n                                    \"requested_amount\"\n                                ]\n                            }\n                        ]\n                    },\n                    \"maximum\": 1000000000,\n                    \"minimum\": 10\n                }\n            ],\n            \"status\": \"active\",\n            \"created_on\": \"2024-06-28T13:44:28.000Z\"\n        }\n    ],\n    \"deprecation\": {\n        \"message\": \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models going forward.\"\n    }\n}"
+						},
+						{
+							"name": "List Model using wrong url",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/decisioning/model",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"decisioning",
+										"model"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 18:01:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "bf1c662f-e321-4c17-8e2f-94c960a4a961"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-PJUgx06CPglPjnDcj6xasyJZVfQ\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af9513eb410498-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"message\": \"GET /decisioning/model not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Model",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has required fields\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"status\", \"success\");\r",
+									"    pm.expect(jsonData).to.have.property(\"message\", \"Successful\");\r",
+									"    pm.expect(jsonData).to.have.property(\"data\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data).to.have.property(\"id\").that.is.a(\"number\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\", \"Default Lendsqr decision model\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"status\", \"active\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Deprecation message exists and is correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"deprecation\");\r",
+									"    pm.expect(jsonData.deprecation).to.have.property(\"message\", \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models/9279/settings going forward.\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Decision settings are correct\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.have.property(\"decision_setting\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.decision_setting).to.have.property(\"karma\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.decision_setting.karma).to.have.property(\"required\", true);\r",
+									"    pm.expect(jsonData.data.decision_setting.karma).to.have.property(\"sequence\", 1);\r",
+									"    pm.expect(jsonData.data.decision_setting).to.have.property(\"ecosystem\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.decision_setting.ecosystem).to.have.property(\"required\", true);\r",
+									"    pm.expect(jsonData.data.decision_setting.ecosystem).to.have.property(\"sequence\", 2);\r",
+									"    pm.expect(jsonData.data.decision_setting).to.have.property(\"credit_bureau\").that.is.an('object').and.not.empty;\r",
+									"    pm.expect(jsonData.data.decision_setting.credit_bureau).to.have.property(\"required\", true);\r",
+									"    pm.expect(jsonData.data.decision_setting.credit_bureau).to.have.property(\"sequence\", 3);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Offer settings are within expected ranges\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    jsonData.data.offer_setting.forEach(function (offer) {\r",
+									"        pm.expect(offer).to.have.property(\"maximum\").that.is.a(\"number\").and.is.at.most(1000000000);\r",
+									"        pm.expect(offer).to.have.property(\"minimum\").that.is.a(\"number\").and.is.at.least(10);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Created On date format is ISO 8601\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    const createdOnDate = new Date(jsonData.data.created_on);\r",
+									"    pm.expect(createdOnDate.toISOString()).to.equal(jsonData.data.created_on);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Test for invalid model id\r",
+									"pm.test(\"Response status is error\", function () {\r",
+									"    pm.response.to.have.jsonBody(\"status\", \"error\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check error message\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.equal(\"Decision model not found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check deprecation message\", function () {\r",
+									"    const deprecationMessage = pm.response.json().deprecation.message;\r",
+									"    pm.expect(deprecationMessage).to.exist;\r",
+									"    pm.expect(deprecationMessage).to.equal(\"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models/92/settings going forward.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://adjutor.lendsqr.com/decisioning/models/9279/settings",
+							"protocol": "https",
+							"host": [
+								"adjutor",
+								"lendsqr",
+								"com"
+							],
+							"path": [
+								"decisioning",
+								"models",
+								"9279",
+								"settings"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Model",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/decisioning/models/9279/settings",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"decisioning",
+										"models",
+										"9279",
+										"settings"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 17:57:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "b2a6f64e-166f-40bf-b50e-5268e1c6aebc"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 28 Jun 2024 17:57:13 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36d-CKyO0ux+2NojXGz0g/ZAcVhV0RU\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af8ed7feb80498-CDG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"data\": {\n        \"id\": 9279,\n        \"product_id\": null,\n        \"org_id\": 5301,\n        \"version_id\": 0,\n        \"country\": \"NGA\",\n        \"name\": \"Default Lendsqr decision model\",\n        \"description\": \"Default decision model apply to all lender or products without a decision model set for it\",\n        \"decision_setting\": {\n            \"karma\": {\n                \"required\": true,\n                \"sequence\": 1,\n                \"continue_on_failure\": false,\n                \"pre_offer\": true\n            },\n            \"ecosystem\": {\n                \"required\": true,\n                \"sequence\": 2,\n                \"continue_on_failure\": false,\n                \"pre_offer\": true\n            },\n            \"credit_bureau\": {\n                \"required\": true,\n                \"sequence\": 3,\n                \"continue_on_failure\": false\n            }\n        },\n        \"offer_setting\": [\n            {\n                \"rule\": {\n                    \"*\": [\n                        1,\n                        {\n                            \"var\": [\n                                \"requested_amount\"\n                            ]\n                        }\n                    ]\n                },\n                \"maximum\": 1000000000,\n                \"minimum\": 10\n            }\n        ],\n        \"status\": \"active\",\n        \"created_on\": \"2024-06-28T13:44:28.000Z\",\n        \"settings\": []\n    },\n    \"deprecation\": {\n        \"message\": \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models/9279/settings going forward.\"\n    }\n}"
+						},
+						{
+							"name": "Get Model for invalid id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://adjutor.lendsqr.com/decisioning/models/9279/settings",
+									"protocol": "https",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"decisioning",
+										"models",
+										"9279",
+										"settings"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 28 Jun 2024 18:00:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Request-ID",
+									"value": "b3394b4f-e429-4791-9952-4e7fe006e116"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Fri, 28 Jun 2024 18:00:04 GMT"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"da-k3WXOyo0lt48FzqZPQSqsf1URtY\""
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "89af93030a770498-CDG"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"message\": \"Decision model not found\",\n    \"deprecation\": {\n        \"message\": \"We're deprecating this endpoint starting from 2023-04-01, please use the new version /v2/decisioning/models/92/settings going forward.\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Data API for Lendsqr Lenders",
+			"item": [
+				{
+					"name": "Data API Functions",
+					"item": [
+						{
+							"name": "Options",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Users endpoint status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Users endpoint returns data\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.data).to.be.an('array').that.is.not.empty;\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"pm.test(\"Check paths format\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.data.forEach(endpoint => {\r",
+											"        pm.expect(endpoint.path).to.match(/^\\/.*/);\r",
+											"    });\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Validate Options endpoint description\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    const optionsEndpoint = jsonData.data.find(endpoint => endpoint.name === \"Options\");\r",
+											"    pm.expect(optionsEndpoint.description).to.contain(\"List all available data options\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Check Users endpoint\", function () {\r",
+											"    const data = pm.response.json().data;\r",
+											"    const usersEndpoint = data.find(item => item.path === \"/users\");\r",
+											"    pm.expect(usersEndpoint).to.not.be.undefined;\r",
+											"    pm.expect(usersEndpoint.name).to.equal(\"Users\");\r",
+											"    pm.expect(usersEndpoint.description).to.equal(\"Get details of all users that have signed up to the system. This may include users who have not completed their onboarding\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://adjutor.lendsqr.com/v2/data/options",
+									"protocol": "http",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"v2",
+										"data",
+										"options"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {\r",
+											"  pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Check pagination details\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.page_size).to.eql(10);\r",
+											"    pm.expect(jsonData.page).to.eql(2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check headers\", function () {\r",
+											"    pm.response.to.have.header(\"Content-Type\");\r",
+											"    pm.response.to.have.header(\"Content-Length\");\r",
+											"\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Check required fields in Data\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.Data[0]).to.have.property(\"first_name\");\r",
+											"    pm.expect(jsonData.Data[0]).to.have.property(\"last_name\");\r",
+											"    \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer sk_live_GlxPezhYV4N8JOfJp3yBPKUIQmLA2C6DwVhyo0B6",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://adjutor.lendsqr.com/v2/data/users",
+									"protocol": "http",
+									"host": [
+										"adjutor",
+										"lendsqr",
+										"com"
+									],
+									"path": [
+										"v2",
+										"data",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
